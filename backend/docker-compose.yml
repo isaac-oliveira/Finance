@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: dbmysql
+      MYSQL_DATABASE: financedb
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+
+  api:
+    image: node:10.16-slim
+    container_name: 'finance-api'
+    ports:
+      - 3000:3000
+    working_dir: '/home/node/app'
+    volumes:
+      - ./:/home/node/app
+    command: yarn dev
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: 'bridge'
