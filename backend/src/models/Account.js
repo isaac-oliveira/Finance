@@ -15,8 +15,12 @@ class Account extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'account_user' });
-    this.hasOne(models.Card, { foreignKey: 'account_id', as: 'account_card' });
+    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+    this.hasOne(models.Card, { foreignKey: 'account_id', as: 'card' });
+    this.hasMany(models.Operation, {
+      foreignKey: 'account_id',
+      as: 'operations',
+    });
   }
 }
 

@@ -14,9 +14,9 @@ class Operation extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.Account, {
+    this.belongsTo(models.Account, {
       foreignKey: 'account_id',
-      as: 'operation_account',
+      as: 'accounts',
     });
   }
 }
