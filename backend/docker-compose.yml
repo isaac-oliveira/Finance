@@ -7,6 +7,7 @@ services:
     restart: always
     ports:
       - 3306:3306
+    container_name: finance-db
     environment:
       MYSQL_ROOT_PASSWORD: dbmysql
       MYSQL_DATABASE: financedb
