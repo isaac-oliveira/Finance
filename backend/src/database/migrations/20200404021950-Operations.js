@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      accountId: {
+      account_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'accounts', key: 'id' },
@@ -22,11 +22,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.FLOAT,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },

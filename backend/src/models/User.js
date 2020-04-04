@@ -1,14 +1,12 @@
 import { Model, DataTypes } from 'sequelize';
 
-class Users extends Model {
+class User extends Model {
   static init(sequelize) {
     super.init(
       {
         name: DataTypes.STRING,
         login: DataTypes.STRING,
         password: DataTypes.STRING,
-        createdAt: DataTypes.DATE,
-        updatedAt: DataTypes.DATE,
       },
       {
         sequelize,
@@ -17,8 +15,8 @@ class Users extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Accounts, { foreignKey: 'userId', as: 'accounts' });
+    this.hasOne(models.Account, { foreignKey: 'user_id', as: 'account' });
   }
 }
 
-export default Users;
+export default User;

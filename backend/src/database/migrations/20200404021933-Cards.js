@@ -7,14 +7,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      accountId: {
+      account_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'accounts', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      cardNumber: {
+      card_number: {
         allowNull: false,
         unique: true,
         type: Sequelize.BIGINT,
@@ -23,11 +23,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },

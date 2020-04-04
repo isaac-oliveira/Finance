@@ -1,30 +1,34 @@
 import Sequelize from 'sequelize';
-import Users from '../models/Users';
-import Accounts from '../models/Accounts';
-import Cards from '../models/Cards';
-import Operations from '../models/Operations';
-import Transfers from '../models/Transfers';
 
-const connection = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USERNAME,
-  process.env.DB_PASSWORD,
-  {
-    host: 'finance-db',
-    dialect: 'mysql',
-  }
-);
+import User from '../models/User';
+import Account from '../models/Account';
+import Card from '../models/Card';
+// import Operation from '../models/Operation';
+// import Transfer from '../models/Transfer';
 
-Users.init(connection);
-Accounts.init(connection);
-Cards.init(connection);
-Operations.init(connection);
-Transfers.init(connection);
+const connection = new Sequelize({
+  database: process.env.DB_NAME,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  host: 'finance-db',
+  dialect: 'mysql',
+  define: {
+    timestamps: true,
+    underscored: true,
+    underscoredAll: true,
+  },
+});
 
-Users.associate(connection.models);
-Accounts.associate(connection.models);
-Cards.associate(connection.models);
-Operations.associate(connection.models);
-Transfers.associate(connection.models);
+User.init(connection);
+Account.init(connection);
+Card.init(connection);
+// Operation.init(connection);
+// Transfer.init(connection);
+
+User.associate(connection.models);
+Account.associate(connection.models);
+Card.associate(connection.models);
+// Operation.associate(connection.models);
+// Transfer.associate(connection.models);
 
 export default connection;
