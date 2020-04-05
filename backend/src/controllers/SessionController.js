@@ -15,11 +15,11 @@ export default {
 
         const token = jwt.sign({ id: user.id }, process.env.SECRET);
 
-        return res.status(200).send({ user, account, card, token });
+        return res.status(200).json({ user, account, card, token });
       } catch (err) {
-        return res.status(500).send({ message: 'Erro interno no servidor' });
+        return res.status(500).json({ message: 'Erro interno no servidor' });
       }
     }
-    return res.status(401).send({ message: 'Usuário ou senha inválido!' });
+    return res.status(401).json({ message: 'Usuário ou senha inválido!' });
   },
 };
