@@ -23,7 +23,15 @@ export default {
         value,
       });
 
-      return res.status(200).json({ account, operation });
+      return res.status(200).json({
+        operation_id: operation.id,
+        agency: account.agency,
+        account_number: account.account_number,
+        balance: account.balance,
+        value: operation.value,
+        type: operation.type,
+        date: operation.createdAt,
+      });
     } catch (err) {
       return res.status(500).json({ message: 'Erro interno no servidor' });
     }

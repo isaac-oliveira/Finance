@@ -10,7 +10,6 @@ import authenticate from './middleware/authenticate';
 const routes = express.Router();
 
 routes.post('/register', UserController.store);
-routes.get('/users', UserController.index);
 routes.post('/login', SessionController.store);
 routes.put('/operation/:id', authenticate, OperationController.update);
 routes.get('/operations', authenticate, OperationController.index);

@@ -40,7 +40,15 @@ export default {
           value,
         });
 
-        return res.status(200).json({ transfer });
+        return res.status(200).json({
+          transfer_id: transfer.id,
+          agency_sent: accountSent.agency,
+          account_number_sent: accountSent.account_number,
+          agency_received: accountReceived.agency,
+          account_number_received: accountReceived.account_number,
+          value: transfer.value,
+          date: transfer.createdAt,
+        });
       }
       return res.status(400).json({ message: 'Saldo insuficiente' });
     } catch (err) {

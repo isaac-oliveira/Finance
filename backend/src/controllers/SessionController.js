@@ -15,7 +15,18 @@ export default {
 
         const token = jwt.sign({ id: user.id }, process.env.SECRET);
 
-        return res.status(200).json({ user, account, card, token });
+        return res.status(200).json({
+          user: {
+            id: user.id,
+            name: user.name,
+            agency: account.agency,
+            account_number: account.account_number,
+            balance: account.balance,
+            card_number: card.card_number,
+            card_expire: card.expire,
+          },
+          token,
+        });
       } catch (err) {
         return res.status(500).json({ message: 'Erro interno no servidor' });
       }
