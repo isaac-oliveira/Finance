@@ -32,14 +32,14 @@ export default {
 
       const token = jwt.sign({ id: user.id }, process.env.SECRET);
 
-      return res.status(201).send({ user, account, card, token });
+      return res.status(201).json({ user, account, card, token });
     } catch (err) {
-      return res.status(500).send({ message: 'Erro interno no servidor', err });
+      return res.status(500).json({ message: 'Erro interno no servidor', err });
     }
   },
   index: async (req, res) => {
     const users = await User.findAll();
 
-    return res.status(200).send({ users });
+    return res.status(200).json({ users });
   },
 };

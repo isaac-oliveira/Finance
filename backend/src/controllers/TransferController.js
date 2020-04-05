@@ -9,37 +9,40 @@ export default {
 
     try {
       const accountSent = await Account.findByPk(id);
-      const accountReceived = await Account.findOne({
-        where: { agency, account_number },
-      });
+      if (accountSent.balance >= value) {
+        const accountReceived = await Account.findOne({
+          where: { agency, account_number },
+        });
 
-      const transfer = await Transfer.create({
-        account_sent_id: accountSent.id,
-        account_received_id: accountReceived.id,
-        value,
-      });
+        const transfer = await Transfer.create({
+          account_sent_id: accountSent.id,
+          account_received_id: accountReceived.id,
+          value,
+        });
 
-      Object.assign(accountSent, { balance: accountSent.balance - value });
-      await accountSent.save();
+        Object.assign(accountSent, { balance: accountSent.balance - value });
+        await accountSent.save();
 
-      await Operation.create({
-        account_id: accountSent.id,
-        type: 'transfer',
-        value: -value,
-      });
+        await Operation.create({
+          account_id: accountSent.id,
+          type: 'transfer',
+          value: -value,
+        });
 
-      Object.assign(accountReceived, {
-        balance: accountReceived.balance + value,
-      });
-      await accountReceived.save();
+        Object.assign(accountReceived, {
+          balance: accountReceived.balance + value,
+        });
+        await accountReceived.save();
 
-      await Operation.create({
-        account_id: accountReceived.id,
-        type: 'transfer',
-        value,
-      });
+        await Operation.create({
+          account_id: accountReceived.id,
+          type: 'transfer',
+          value,
+        });
 
-      return res.status(200).json({ transfer });
+        return res.status(200).json({ transfer });
+      }
+      return res.status(400).json({ message: 'Saldo insuficiente' });
     } catch (err) {
       return res.status(500).json({ message: 'Erro interno no servidor' });
     }
