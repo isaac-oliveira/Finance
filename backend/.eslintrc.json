@@ -17,6 +17,8 @@
   "rules": {
     "prettier/prettier": "error",
     "no-unused-vars": ["warn"],
-    "camelcase": "warn"
+    "camelcase": "warn",
+    "dot-notation": "off",
+    "consistent-return": "off"
   }
 }
