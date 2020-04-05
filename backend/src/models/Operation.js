@@ -4,7 +4,7 @@ class Operation extends Model {
   static init(sequelize) {
     super.init(
       {
-        type: DataTypes.ENUM('withdraw', 'deposit', 'pay'),
+        type: DataTypes.ENUM('withdraw', 'deposit', 'pay', 'transfer'),
         value: DataTypes.FLOAT,
       },
       {

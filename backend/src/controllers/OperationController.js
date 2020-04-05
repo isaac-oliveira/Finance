@@ -9,7 +9,7 @@ export default {
 
     try {
       const account = await Account.findByPk(id);
-      if (type === 'withdraw') {
+      if (type !== 'deposit') {
         if (!(value < account.balance && value > 0))
           return res.status(400).json({ message: 'Valor inválido!' });
         value = -value;

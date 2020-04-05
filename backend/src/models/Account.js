@@ -21,6 +21,14 @@ class Account extends Model {
       foreignKey: 'account_id',
       as: 'operations',
     });
+    this.hasMany(models.Transfer, {
+      foreignKey: 'account_sent_id',
+      as: 'transferSent',
+    });
+    this.hasMany(models.Transfer, {
+      foreignKey: 'account_received_id',
+      as: 'transferReceived',
+    });
   }
 }
 

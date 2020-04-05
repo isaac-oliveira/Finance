@@ -3,6 +3,7 @@ import express from 'express';
 import UserController from './controllers/UserController';
 import SessionController from './controllers/SessionController';
 import OperationController from './controllers/OperationController';
+import TransferController from './controllers/TransferController';
 
 const routes = express.Router();
 
@@ -11,5 +12,6 @@ routes.get('/users', UserController.index);
 routes.post('/login', SessionController.store);
 routes.put('/operation/:id', OperationController.update);
 routes.get('/operations', OperationController.index);
+routes.put('/transfer/:id', TransferController.update);
 
 export default routes;
