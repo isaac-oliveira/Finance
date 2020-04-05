@@ -19,7 +19,7 @@ export default {
         value,
       });
 
-      Object.assign(accountSent, { balance: accountSent.balance + value });
+      Object.assign(accountSent, { balance: accountSent.balance - value });
       await accountSent.save();
 
       await Operation.create({
