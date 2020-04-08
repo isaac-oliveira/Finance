@@ -22,18 +22,6 @@ services:
     networks:
       - backend
 
-  api:
-    image: node:10.16-slim
-    container_name: 'finance-api'
-    ports:
-      - 3000:3000
-    working_dir: '/home/node/app'
-    volumes:
-      - ./:/home/node/app
-    command: yarn dev
-    networks:
-      - backend
-
 networks:
   backend:
     driver: 'bridge'

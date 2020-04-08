@@ -10,7 +10,7 @@ const connection = new Sequelize({
   database: process.env.DB_NAME,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
-  host: 'finance-db',
+  host: 'localhost',
   dialect: 'mysql',
   define: {
     timestamps: true,
