@@ -9,13 +9,13 @@ import Withdraw from '../pages/Withdraw';
 export default function AppRoute() {
   return (
     <Switch>
-      <Route path="/app" exact>
-        <Redirect to="/app/history" />
+      <Route path="/home" exact>
+        <Redirect to="/home/history" />
       </Route>
-      <Route path="/app/history" component={History} />
-      <Route path="/app/transfer" component={Transfer} />
-      <Route path="/app/deposit" component={Deposit} />
-      <Route path="/app/withdraw" component={Withdraw} />
+      <Route path="/home/history" component={History} />
+      <Route path="/home/transfer" component={Transfer} />
+      <Route path="/home/deposit" component={Deposit} />
+      <Route path="/home/withdraw" component={Withdraw} />
     </Switch>
   );
 }

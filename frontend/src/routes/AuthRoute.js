@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import AppRoute from './AppRoute';
+import Home from '../pages/Home';
 
 export default function AuthRoute() {
   return (
@@ -13,7 +13,7 @@ export default function AuthRoute() {
       </Route>
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
-      <Route path="/app" component={AppRoute} />
+      <Route path="/home" component={Home} />
       <Route path="*">
         <p>Not Found</p>
       </Route>
