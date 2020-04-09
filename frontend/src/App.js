@@ -1,10 +1,12 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import AuthRoute from './routes/AuthRoute';
 
 function App() {
   return (
-    <div>
-      <p>Hello world!</p>
-    </div>
+    <BrowserRouter>
+      <AuthRoute />
+    </BrowserRouter>
   );
 }
 
