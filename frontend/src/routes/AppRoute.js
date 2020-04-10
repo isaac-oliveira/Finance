@@ -5,17 +5,29 @@ import History from '../pages/History';
 import Transfer from '../pages/Transfer';
 import Deposit from '../pages/Deposit';
 import Withdraw from '../pages/Withdraw';
+import Confirmation from '../pages/Confirmation';
 
-export default function AppRoute() {
+export default function AppRoute({ onPageChange }) {
   return (
     <Switch>
       <Route path="/home" exact>
         <Redirect to="/home/history" />
       </Route>
-      <Route path="/home/history" component={History} />
-      <Route path="/home/transfer" component={Transfer} />
-      <Route path="/home/deposit" component={Deposit} />
-      <Route path="/home/withdraw" component={Withdraw} />
+      <Route path="/home/history">
+        <History onPageChange={onPageChange} />
+      </Route>
+      <Route path="/home/transfer">
+        <Transfer onPageChange={onPageChange} />
+      </Route>
+      <Route path="/home/deposit">
+        <Deposit onPageChange={onPageChange} />
+      </Route>
+      <Route path="/home/withdraw">
+        <Withdraw onPageChange={onPageChange} />
+      </Route>
+      <Route path="/home/confirmation">
+        <Confirmation />
+      </Route>
     </Switch>
   );
 }

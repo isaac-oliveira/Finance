@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function History() {
+import {
+  Container,
+  Logo,
+  List,
+  ItemContainer,
+  Type,
+  Value,
+} from './styles/History';
+
+import dollarLogo from '../assets/dollar.png';
+
+export default function History({ onPageChange }) {
+  const [historics, setHistorics] = useState([1, -2]);
+  useEffect(() => {
+    onPageChange('history');
+  }, [onPageChange]);
+
   return (
-    <div>
-      <h1>History</h1>
-    </div>
+    <Container>
+      <Logo src={dollarLogo} />
+      <List>
+        {historics.map((historic) => (
+          <ItemContainer>
+            <Type>Saque</Type>
+            <Value positive={historic >= 0}>{historic}</Value>
+          </ItemContainer>
+        ))}
+      </List>
+    </Container>
   );
 }
