@@ -60,13 +60,14 @@ export const NavItem = styled(Link)`
   align-items: center;
 `;
 
-export const Logout = styled(Link)`
+export const Logout = styled.button`
   display: flex;
   flex: 1;
   font-size: 18px;
   font-weight: 400;
   color: #c26246;
-  text-decoration: none;
+  background-color: transparent;
+  border: none;
   justify-content: center;
   align-items: center;
 `;

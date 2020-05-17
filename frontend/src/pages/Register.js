@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import {
@@ -15,12 +15,23 @@ import {
 
 import Input from '../components/Input';
 import Button from '../components/Button';
+import FinanceApi from '../services/api';
 
 export default function Register() {
+  const [name, setName] = useState('');
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+
   const history = useHistory();
 
-  function register() {
-    history.push('/home');
+  async function handleRegister() {
+    const response = await FinanceApi.register(name, login, password);
+    console.log(response);
+    // eslint-disable-next-line no-alert
+    if (!response.ok) return alert(response.data.message);
+    await localStorage.setItem('@Finance:token', response.data.token);
+    await localStorage.setItem('@Finance:userId', response.data.userId);
+    return history.push('/home');
   }
   return (
     <Container>
@@ -35,10 +46,15 @@ export default function Register() {
           <Line />
         </RowLayout>
         <Form>
-          <Input placeholder="NOME" />
-          <Input placeholder="LOGIN" />
-          <Input placeholder="SENHA" />
-          <Button title="CADASTRAR" onClick={register} />
+          <Input placeholder="NOME" value={name} onChangeText={setName} />
+          <Input placeholder="LOGIN" value={login} onChangeText={setLogin} />
+          <Input
+            placeholder="SENHA"
+            type="password"
+            value={password}
+            onChangeText={setPassword}
+          />
+          <Button title="CADASTRAR" onClick={handleRegister} />
         </Form>
       </Content>
     </Container>

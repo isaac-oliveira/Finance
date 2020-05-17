@@ -6,6 +6,8 @@ export const Button = styled.button`
   margin: 10px;
   padding: 10px 40px;
   align-self: center;
+  justify-content: center;
+  align-items: center;
   background-color: ${({ color }) => color};
   ${({ color }) => (color === 'white' ? 'color: #c26246;' : '')}
 `;

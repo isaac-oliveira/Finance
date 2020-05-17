@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import {
   Container,
@@ -9,12 +9,23 @@ import {
   Value,
 } from './styles/History';
 
+import UserContext from '../context/UserContext';
+import FinanceApi from '../services/api';
+import { formatBrCurrency } from '../utils/Format';
+
 import dollarLogo from '../assets/dollar.png';
 
 export default function History({ onPageChange }) {
-  const [historics, setHistorics] = useState([1, -2]);
+  const [user] = useContext(UserContext);
+  const [historics, setHistorics] = useState([]);
+
   useEffect(() => {
     onPageChange('history');
+    async function load() {
+      const response = await FinanceApi.getHistorics(user.id);
+      setHistorics(response.data);
+    }
+    load();
   }, [onPageChange]);
 
   return (
@@ -22,9 +33,11 @@ export default function History({ onPageChange }) {
       <Logo src={dollarLogo} />
       <List>
         {historics.map((historic) => (
-          <ItemContainer>
-            <Type>Saque</Type>
-            <Value positive={historic >= 0}>{historic}</Value>
+          <ItemContainer key={historic.id}>
+            <Type>{historic.type}</Type>
+            <Value positive={historic.value >= 0}>
+              {formatBrCurrency(historic.value)}
+            </Value>
           </ItemContainer>
         ))}
       </List>

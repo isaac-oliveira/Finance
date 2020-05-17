@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 import {
   Container,
@@ -16,9 +16,17 @@ import {
   VisaLogo,
 } from './styles/Card';
 
+import UserContext from '../context/UserContext';
+import {
+  formatCardNumber,
+  formatAccountNumber,
+  formatExpireDate,
+} from '../utils/Format';
+
 import visaLogo from '../assets/visa.png';
 
 export default function Card() {
+  const [user] = useContext(UserContext);
   const [showInfo, setShowInfo] = useState(false);
 
   function handleShowInfo() {
@@ -30,22 +38,26 @@ export default function Card() {
       <ColumnLayout>
         <BankName>Banco</BankName>
         <CardNumber>
-          {showInfo ? '4615 3489 3051 1987' : '****  ****  ****  ****'}
+          {showInfo
+            ? formatCardNumber(user.card_number)
+            : '****  ****  ****  ****'}
         </CardNumber>
-        <CardExpire>{showInfo ? '08/23' : '**/**'}</CardExpire>
+        <CardExpire>
+          {showInfo ? formatExpireDate(user.card_expire) : '**/**'}
+        </CardExpire>
         <AccountContent>
           <ColumnLayout>
             <Label>Ag.</Label>
-            <Number>{showInfo ? '1088' : '****'}</Number>
+            <Number>{showInfo ? user.agency : '****'}</Number>
           </ColumnLayout>
           <ColumnLayout>
             <Label>Conta</Label>
-            <Number>{showInfo ? '219433-3' : '******-*'}</Number>
+            <Number>
+              {showInfo ? formatAccountNumber(user.account_number) : '******-*'}
+            </Number>
           </ColumnLayout>
         </AccountContent>
-        <Username>
-          {showInfo ? 'Isaac Santos de Oliveira' : '*********************'}
-        </Username>
+        <Username>{showInfo ? user.name : '*********************'}</Username>
       </ColumnLayout>
       <SpaceBetweenLayout>
         <SeeButton type="button" onClick={handleShowInfo}>

@@ -24,11 +24,13 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'object-curly-newline': 'off',
     'no-unused-vars': ['warn'],
+    camelcase: ['off'],
     'comma-dangle': [
       'error',
       {
-        functions: 'never',
+        functions: 'ignore',
         imports: 'ignore',
+        objects: 'ignore',
       },
     ],
   },
